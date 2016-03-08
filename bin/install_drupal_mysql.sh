@@ -7,7 +7,9 @@
 # up one of these for you by default.
 #
 BASEDIR=${pwd}
+MYDIR="html"
 rm -rf html
-$BASEDIR/vendor/bin/drush make -y --force-complete drupal.make html
+
+bin/drush make  --force-complete drupal.make $MYDIR -y 
 cd html
-$BASEDIR/vendor/bin/drush si -y standard --db-url=mysql://root@localhost/cit-tma --account-name=admin --account-pass=admin
+bin/drush si -y standard --db-url=mysql://root@localhost/cit-tma --account-name=admin --account-pass=admin

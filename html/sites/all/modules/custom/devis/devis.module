@@ -1,0 +1,78 @@
+<?php
+
+ /**
+  * @file Creation et gestion des devis.
+  */
+
+  /**
+  * implements hook_help().
+  */
+
+ function devis_help($path, $arg){
+   switch($path){
+     case "admin/content/help#devis":
+      return "<p>".t('Aide à la création et à la gestion des devis.')."</p>";
+   }
+ }
+
+ function devis_form_alter(&$form, &$form_state, $form_id){
+
+  dpm($form);
+  if($form_id == 'devis_node_form' &&  $form['type']['#value'] == "devis"){
+
+    // assignation la valeur par defaut de la réference du devis à la création.
+    if($form['title']['#default_value'] == ''){
+      $form["field_reference"][LANGUAGE_NONE][0]['value']['#default_value'] = _devis_node_reference();
+    }
+
+
+    $form['#validate'][] = 'devis_form_validate';
+
+  }
+
+
+
+ }
+
+ function devis_form_validate($form, &$form_state){
+   dpm($form_state);
+   $ref = _get_reference();
+   if($form["field_reference"][LANGUAGE_NONE][0]['value']['#default_value']  == $ref){
+     form_set_error('field_reference', t('Cette référence est déjà enregistré. Veuillez saisir une nouvelle référence.'));
+   }
+ }
+
+
+/**
+* Génère la référence du devis en cours de création
+*/
+ function _devis_node_reference(){
+   $date = date('dm');
+   $ref = _devis_numero() +1;
+   if($ref <10){
+     $ref = '0'.$ref;
+   }
+    return  "DEV-".$ref.'-'.$date;
+ }
+
+ // le numéro du devis dans la réference.
+ function _devis_numero(){
+   $req = db_query('SELECT field_reference_value FROM {field_data_field_reference}  ORDER BY entity_id DESC LIMIT 1');
+   $ref = $req->fetchObject()->field_reference_value;
+   $ref = explode('-', $ref)[1];
+   return $ref;
+ }
+
+ /**
+ * dernière référence crée.
+ */
+ function _get_reference(){
+   $req = db_query('SELECT field_reference_value FROM {field_data_field_reference}  ORDER BY entity_id DESC LIMIT 1');
+   return $req->fetchObject()->field_reference_value;
+
+ }
+ 
+
+ function _devis_node_revision_list($node){
+    dpm($node);
+ }
