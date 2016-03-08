@@ -9,7 +9,7 @@ matrix:
 
 
 mysql:
-  database: cit-tma
+  database: cittma
   username: roo
   encoding: utf8
 
@@ -34,10 +34,10 @@ before_script:
 
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
   - rm -rf html
-  - mysql -e 'create database cit-tma'
+  - mysql -e 'create database cittma'
   - drush  make -y --force-complete drupal.make html
   - cd html
-  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php si -y standard --db-url=mysql://root@localhost/cit-tma --account-name=admin --account-pass=admin
+  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php si -y standard --db-url=mysql://root@localhost/cittma --account-name=admin --account-pass=admin
 
   # start a web server on port 8080, run in the background; wait for initialization
   - php -S localhost:8080 &
