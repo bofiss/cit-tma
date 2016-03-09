@@ -1,0 +1,17 @@
+Feature: Article
+    Tests on articles
+    @drush @javascript
+    Scenario: Admin can create a article
+        Given I am logged in as a user with the "administrator" role
+        When I am on "/node/add/article"
+        And I fill in the following:
+           | Title     | Test article                  |
+           | Body      | This is the body of article   |
+       And faire un screenshot
+        And I press "Save"
+        And faire un screenshot
+        Then faire un screenshot
+        And I break
+        And I should see the text "Article"
+        And I should see the text "Test article"
+        And I should see the text "has been created."

@@ -1,0 +1,28 @@
+<?php
+/**
+* Implements hook_help().
+*/
+
+function tdd_help($path, $arg){
+  switch ($path) {
+    case 'admin/content/help#tdd':
+      return '<p>'. t('Aide pour le module TDD.').'</p>';
+      break;
+   }
+}
+
+/**
+* Find word in the article node.
+*/
+
+
+function tdd_search_word($query){
+  $words = [];
+  if ($query != NULL ) {
+    $nodes = db_query("SELECT title FROM {node} WHERE title LIKE '%%%$query%%'");
+    foreach ($nodes as $node) {
+      $words[]=$node->title;
+    }
+  }
+  return $words;
+}

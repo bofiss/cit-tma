@@ -22,6 +22,17 @@ class FeatureContext extends RawDrupalContext implements Context, SnippetAccepti
     // Initialize your context here
   }
 
+
+  /**
+  * @Given :arg1 nodes:
+  */
+  public function nodes($arg1, TableNode $table)
+  {
+      
+  }
+
+
+
 //
 // Place your definition and hook methods here:
 //

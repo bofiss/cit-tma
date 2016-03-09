@@ -13,7 +13,10 @@
         "phpunit/phpunit": "4.8.0",
         "squizlabs/php_codesniffer": "^2.5",
         "phpmd/phpmd": "^2.3",
-        "drush/drush": "dev-master"
+        "drush/drush": "dev-master",
+        "phplint/phplint": "dev-master",
+        "fzaninotto/faker": "^1.5",
+        "codeception/codeception": "^2.1"
     },
     "config": {
          "bin-dir": "bin/"

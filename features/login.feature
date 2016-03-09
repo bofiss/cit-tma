@@ -6,6 +6,11 @@ Feature: Login
      Then I should see an "input#edit-name" element
       And I should see an "input#edit-pass" element
 
+
+  Scenario: A user should see "Facere a provident ipsum." on the homepage
+    Given I am on the homepage
+     Then I should see the text "Facere a provident ipsum."
+
   @api
   Scenario: Ensure as a logged in user, I can log out.
     Given I am logged in as a user with the "authenticated user" role
