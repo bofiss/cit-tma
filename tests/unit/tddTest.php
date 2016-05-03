@@ -25,7 +25,7 @@ class TDDtest extends PHPUnit_Framework_TestCase{
   }
 
   public function test_tdd_search_words(){
-    $query = "Bonjour";
+    $query = "Bonjou";
     $words = tdd_search_word($query);
     $this->assertEquals(count($words), 2);
     foreach($words as $word) {
